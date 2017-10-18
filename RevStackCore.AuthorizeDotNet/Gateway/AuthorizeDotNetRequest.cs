@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using RevStackCore.Payment;
 using RevStackCore.Payment.Model;
 using System.Text;
-using System.Web;
 using System.IO;
 using RevStackCore.AuthorizeDotNet.Model;
+using RevStackCore.AuthorizeDotNet.Gateway;
+using RevStackCore.AuthorizeDotNet.Model;
+using System.Net;
 
 namespace RevStackCore.AuthorizeDotNet.Gateway
 {
@@ -464,7 +466,7 @@ namespace RevStackCore.AuthorizeDotNet.Gateway
         {
             var sb = new StringBuilder();
             foreach (var key in KeyValues.Keys)
-                sb.AppendFormat("{0}={1}&", key, HttpUtility.UrlEncode(KeyValues[key]));
+                sb.AppendFormat("{0}={1}&", key, WebUtility.UrlEncode(KeyValues[key]));
 
             var result = sb.ToString();
             return result.TrimEnd('&');

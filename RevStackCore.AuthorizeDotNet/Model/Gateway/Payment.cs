@@ -1,69 +1,69 @@
 ﻿using RevStackCore.AuthorizeDotNet.Gateway;
+//using RevStackCore.AuthorizeDotNet.net.authorize.api;
 using RevStackCore.Payment.Model;
 using System;
 using System.Collections.Generic;
-using net.authorize.api;
 
 namespace RevStackCore.AuthorizeDotNet.Model.Gateway
 {
     public class Payment : IGatewayResponse, IPayment
     {
-        public Payment(TransactionDetailsType transactionDetails)
-        {
-            this.Id = transactionDetails.transId;
-            this.AuthorizationCode = transactionDetails.authCode;
-            this.Amount = transactionDetails.settleAmount;
-            this.ResponseCode = transactionDetails.responseCode.ToString();
-            this.Code = transactionDetails.responseCode;
-            this.AvsCode = transactionDetails.AVSResponse;
-            this.Message = transactionDetails.responseReasonDescription;
-            this.TransactionType = transactionDetails.transactionType;
-            this.Message = transactionDetails.transactionStatus;
+        //public Payment(TransactionDetailsType transactionDetails)
+        //{
+        //    this.Id = transactionDetails.transId;
+        //    this.AuthorizationCode = transactionDetails.authCode;
+        //    this.Amount = transactionDetails.settleAmount;
+        //    this.ResponseCode = transactionDetails.responseCode.ToString();
+        //    this.Code = transactionDetails.responseCode;
+        //    this.AvsCode = transactionDetails.AVSResponse;
+        //    this.Message = transactionDetails.responseReasonDescription;
+        //    this.TransactionType = transactionDetails.transactionType;
+        //    this.Message = transactionDetails.transactionStatus;
 
-            if (transactionDetails.shipTo != null)
-            {
-                this.ShipFirstName = transactionDetails.shipTo.firstName;
-                this.ShipLastName = transactionDetails.shipTo.lastName;
-                this.ShipAddress = transactionDetails.shipTo.address;
-                this.ShipCity = transactionDetails.shipTo.city;
-                this.ShipState = transactionDetails.shipTo.state;
-                this.ShipZipCode = transactionDetails.shipTo.zip;
-                this.ShipCountry = transactionDetails.shipTo.country;
-                this.ShipCompany = transactionDetails.shipTo.company;
-            }
+        //    if (transactionDetails.shipTo != null)
+        //    {
+        //        this.ShipFirstName = transactionDetails.shipTo.firstName;
+        //        this.ShipLastName = transactionDetails.shipTo.lastName;
+        //        this.ShipAddress = transactionDetails.shipTo.address;
+        //        this.ShipCity = transactionDetails.shipTo.city;
+        //        this.ShipState = transactionDetails.shipTo.state;
+        //        this.ShipZipCode = transactionDetails.shipTo.zip;
+        //        this.ShipCountry = transactionDetails.shipTo.country;
+        //        this.ShipCompany = transactionDetails.shipTo.company;
+        //    }
 
-            if (transactionDetails.tax != null)
-            {
-                this.Tax = transactionDetails.tax.amount;
-            }
+        //    if (transactionDetails.tax != null)
+        //    {
+        //        this.Tax = transactionDetails.tax.amount;
+        //    }
 
-            if (transactionDetails.billTo != null)
-            {
-                this.FirstName = transactionDetails.billTo.firstName;
-                this.LastName = transactionDetails.billTo.lastName;
-                this.Address = transactionDetails.billTo.address;
-                this.City = transactionDetails.billTo.city;
-                this.State = transactionDetails.billTo.state;
-                this.ZipCode = transactionDetails.billTo.zip;
-                this.Country = transactionDetails.billTo.country;
-                this.Company = transactionDetails.billTo.company;
-            }
+        //    if (transactionDetails.billTo != null)
+        //    {
+        //        this.FirstName = transactionDetails.billTo.firstName;
+        //        this.LastName = transactionDetails.billTo.lastName;
+        //        this.Address = transactionDetails.billTo.address;
+        //        this.City = transactionDetails.billTo.city;
+        //        this.State = transactionDetails.billTo.state;
+        //        this.ZipCode = transactionDetails.billTo.zip;
+        //        this.Country = transactionDetails.billTo.country;
+        //        this.Company = transactionDetails.billTo.company;
+        //    }
 
-            if (transactionDetails.order != null)
-            {
-                this.InvoiceNumber = transactionDetails.order.invoiceNumber;
-            }
-        }
+        //    if (transactionDetails.order != null)
+        //    {
+        //        this.InvoiceNumber = transactionDetails.order.invoiceNumber;
+        //    }
+        //}
 
-        public Payment(TransactionSummaryType transaction)
-        {
-            this.Id = transaction.transId;
-            this.Amount = transaction.settleAmount;
-            this.FirstName = transaction.firstName;
-            this.LastName = transaction.lastName;
-            this.Message = transaction.transactionStatus;
-            this.InvoiceNumber = transaction.invoiceNumber;
-        }
+        //public Payment(TransactionSummaryType transaction)
+        //{
+        //    this.Id = transaction.transId;
+        //    this.Amount = transaction.settleAmount;
+        //    this.FirstName = transaction.firstName;
+        //    this.LastName = transaction.lastName;
+        //    this.Message = transaction.transactionStatus;
+        //    this.InvoiceNumber = transaction.invoiceNumber;
+        //}
 
         public string CcvCode { get; set; }
 

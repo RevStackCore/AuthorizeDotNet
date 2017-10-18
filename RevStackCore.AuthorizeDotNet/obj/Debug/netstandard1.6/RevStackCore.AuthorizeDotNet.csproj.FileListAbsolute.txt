@@ -1,0 +1,3 @@
+C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\bin\RevStackCore.AuthorizeDotNet.deps.json
+C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\bin\RevStackCore.AuthorizeDotNet.dll
+C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\bin\RevStackCore.AuthorizeDotNet.pdb

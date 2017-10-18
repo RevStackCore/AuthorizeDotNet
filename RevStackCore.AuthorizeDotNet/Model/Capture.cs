@@ -1,6 +1,6 @@
-﻿using RevStack.Payment.Model;
+﻿using RevStackCore.Payment.Model;
 
-namespace RevStack.AuthorizeDotNet.Model
+namespace RevStackCore.AuthorizeDotNet.Model
 {
     public class Capture : ICapture
     {

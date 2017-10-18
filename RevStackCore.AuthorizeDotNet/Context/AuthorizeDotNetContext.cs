@@ -2,6 +2,7 @@
 using RevStackCore.Payment.Context;
 using RevStackCore.AuthorizeDotNet.Gateway;
 using System.Collections.Generic;
+using System;
 
 namespace RevStackCore.AuthorizeDotNet.Context
 {
@@ -38,8 +39,9 @@ namespace RevStackCore.AuthorizeDotNet.Context
 
         public IEnumerable<IGatewayResponse> GetTransactions(IGatewayRequest request)
         {
-            var apiRequest = new AuthorizeDotNetApiRequest();
-            return apiRequest.GetTransactions((AuthorizeDotNetRequest)request);
+            throw new NotImplementedException();
+            //var apiRequest = new AuthorizeDotNetApiRequest();
+            //return apiRequest.GetTransactions((AuthorizeDotNetRequest)request);
         }
     }
 }

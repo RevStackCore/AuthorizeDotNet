@@ -353,7 +353,7 @@ namespace RevStackCore.AuthorizeDotNet.Model.Gateway
         {
             var result = 0;
             if (RawResponse.Length > index)
-                int.TryParse(RawResponse[index].ToString(CultureInfo.InvariantCulture), out result);
+                int.TryParse(RawResponse[index].ToString(), out result);
             return result;
         }
 
@@ -366,7 +366,7 @@ namespace RevStackCore.AuthorizeDotNet.Model.Gateway
         {
             decimal result = 0;
             if (RawResponse.Length > index)
-                decimal.TryParse(RawResponse[index].ToString(CultureInfo.InvariantCulture), out result);
+                decimal.TryParse(RawResponse[index].ToString(), out result);
             return result;
         }
 
@@ -379,7 +379,7 @@ namespace RevStackCore.AuthorizeDotNet.Model.Gateway
         {
             var result = string.Empty;
             if (RawResponse.Length > index)
-                result = RawResponse[index].ToString(CultureInfo.InvariantCulture);
+                result = RawResponse[index].ToString();
             return result;
         }
 
@@ -452,7 +452,7 @@ namespace RevStackCore.AuthorizeDotNet.Model.Gateway
             var result = 0;
             for (var i = 0; i < RawResponse.Length; i++)
             {
-                if (RawResponse[i].ToString(CultureInfo.InvariantCulture) != val)
+                if (RawResponse[i].ToString() != val)
                     continue;
                 result = i;
                 break;
