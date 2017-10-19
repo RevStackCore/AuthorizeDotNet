@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <Authors>David Sheets</Authors>
+    <Company>MIS</Company>
+    <PackageLicenseUrl>https://github.com/RevStackCore/AuthorizeDotNet/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright 2017</Copyright>
+    <PackageProjectUrl>https://github.com/RevStackCore/AuthorizeDotNet.git</PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageReleaseNotes>Initial release. Current functions includes Authorize, Capture and Charge.</PackageReleaseNotes>
+    <PackageTags>Authorize.net .net core RevStack RevStackCore</PackageTags>
+    <Description>RevStackCore implementation of the Authorize.Net Payment API.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
