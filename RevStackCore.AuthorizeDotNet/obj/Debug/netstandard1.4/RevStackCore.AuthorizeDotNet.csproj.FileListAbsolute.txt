@@ -1,7 +1,0 @@
-C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\bin\Debug\netstandard1.4\RevStackCore.AuthorizeDotNet.deps.json
-C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\bin\Debug\netstandard1.4\RevStackCore.AuthorizeDotNet.dll
-C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\bin\Debug\netstandard1.4\RevStackCore.AuthorizeDotNet.pdb
-C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\obj\Debug\netstandard1.4\RevStackCore.AuthorizeDotNet.csprojResolveAssemblyReference.cache
-C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\obj\Debug\netstandard1.4\RevStackCore.AuthorizeDotNet.AssemblyInfo.cs
-C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\obj\Debug\netstandard1.4\RevStackCore.AuthorizeDotNet.dll
-C:\Dev\RevStackCore\AuthorizeDotNet\RevStackCore.AuthorizeDotNet\obj\Debug\netstandard1.4\RevStackCore.AuthorizeDotNet.pdb

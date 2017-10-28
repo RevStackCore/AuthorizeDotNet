@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
-    <Authors>David Sheets</Authors>
+    <PackageId>RevStackCore.AuthorizeDotNet</PackageId>
+    <PackageVersion>2.0.0</PackageVersion>
+    <Authors>Scott Francis, David Sheets</Authors>
     <Company>MIS</Company>
     <PackageLicenseUrl>https://github.com/RevStackCore/AuthorizeDotNet/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Copyright 2017</Copyright>
@@ -15,22 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="1.1.2" />
-    <PackageReference Include="RevStackCore.Payment" Version="1.0.0" />
-    <PackageReference Include="System.Net.Requests" Version="4.3.0" />
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.0.1" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.1.0" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.1.0" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.0.1" />
-    <PackageReference Include="System.Xml.XmlSerializer" Version="4.0.11" />
+   
   </ItemGroup>
+
+  
 
   <ItemGroup>
-    <WCFMetadata Include="Connected Services" />
+    <PackageReference Include="RevStackCore.Net" Version="1.0.7" />
+    <PackageReference Include="RevStackCore.Serialization" Version="1.0.3" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Connected Services\" />
-  </ItemGroup>
-
 </Project>
