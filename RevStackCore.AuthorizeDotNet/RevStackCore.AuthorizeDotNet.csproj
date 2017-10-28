@@ -10,9 +10,9 @@
     <Copyright>Copyright 2017</Copyright>
     <PackageProjectUrl>https://github.com/RevStackCore/AuthorizeDotNet.git</PackageProjectUrl>
     <PackageIconUrl></PackageIconUrl>
-    <PackageReleaseNotes>Initial release. Current functions includes Authorize, Capture and Charge.</PackageReleaseNotes>
+    <PackageReleaseNotes>Initial release. Current functions includes Authorize, Capture, Charge, Refund and Void</PackageReleaseNotes>
     <PackageTags>Authorize.net .net core RevStack RevStackCore</PackageTags>
-    <Description>RevStackCore implementation of the Authorize.Net Payment API.</Description>
+    <Description>.Net Core Authorize.Net SDK</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
