@@ -35,7 +35,7 @@ public interface IANetProcessor
 
 # Payment Processor Constructor
 
-The sdk payment processor constructor takes 3 arguments: the Authorize.Net loginId and transactionKey, and the processor mode: Live or Sandbox.
+The sdk payment processor constructor takes 3 arguments: the Authorize.Net loginId and transactionKey, and the processor api mode: Live or Sandbox.
 
 ```cs
 public ANetProcessor(string loginId, string transactionKey, ANetProcessorModeType mode)
@@ -47,7 +47,13 @@ public ANetProcessor(string loginId, string transactionKey, ANetProcessorModeTyp
 ```cs
 using RevStackCore.AuthorizeDotNet;
 
-var processor = new ANetProcessor(LOGIN_ID,TRANSACTION_KEY,ANetProcessorModeType.Sandbox)
+var processor = new ANetProcessor(LOGIN_ID,TRANSACTION_KEY,ANetProcessorModeType.Sandbox);
+var creditCard= new ANetCreditCard
+{
+   CardNumber="4539517044325459",
+   ExpirationDate="2021-10",
+   CardCode="478"
+};
 var response = await processor.ChargeAsync(creditCard,REFERENCE_ID, AMOUNT);
 if (response.ResponseCode == ANetResponseCodeType.Approved)
 {
@@ -69,7 +75,6 @@ else
     }
     
     //do seomthing
-
 }
 
 ```
