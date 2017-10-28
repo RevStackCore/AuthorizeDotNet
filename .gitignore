@@ -1,7 +1,6 @@
 .hg
 bin
 bin.snk
-obj
 *.suo
 *.user
 *.nupkg
@@ -13,7 +12,6 @@ Mono/
 *.rdb
 *.aof
 *.orig
-.vs/
 *.lock.json
 packages/
 nuget.exe

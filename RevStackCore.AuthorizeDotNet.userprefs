@@ -1,9 +1,5 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="RevStackCore.AuthorizeDotNet/Processor/ANetProcessor.cs">
-    <Files>
-      <File FileName="RevStackCore.AuthorizeDotNet/Processor/ANetProcessor.cs" Line="10" Column="84" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

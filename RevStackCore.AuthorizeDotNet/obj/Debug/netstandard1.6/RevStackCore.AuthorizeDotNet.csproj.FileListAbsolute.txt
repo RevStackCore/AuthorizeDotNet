@@ -1,9 +1,0 @@
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/bin/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.deps.json
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/bin/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.dll
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/bin/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.pdb
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/obj/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.csprojResolveAssemblyReference.cache
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/obj/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.csproj.CoreCompileInputs.cache
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/obj/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.AssemblyInfoInputs.cache
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/obj/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.AssemblyInfo.cs
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/obj/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.dll
-/Users/admin/Documents/Development/mono/RevStackCore/RevStackCore.AuthorizeDotNet/RevStackCore.AuthorizeDotNet/obj/Debug/netstandard1.6/RevStackCore.AuthorizeDotNet.pdb
