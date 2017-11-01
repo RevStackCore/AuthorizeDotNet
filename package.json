@@ -1,19 +1,19 @@
 {
-  "name": "RevStackCore.Extensions",
-  "version": "1.0.4",
-  "description": ".net core utilities and extension methods",
-  "main": "RevStackCore.Extensions.sln",
+  "name": "RevStackCore.AuthorizeDotNet",
+  "version": "2.0.0",
+  "description": "A .NET Core Authorize.Net Sdk",
+  "main": "RevStackCore.AuthorizeDotNet.sln",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RevStackCore/Extensions.git"
+    "url": "https://github.com/RevStackCore/AuthorizeDotNet.git"
   },
   "author": "S. Francis",
   "license": "MIT",
   "bugs": {
-		"url": "https://github.com/RevStackCore/Extensions/issues"
+		"url": "https://github.com/RevStackCore/AuthorizeDotNet/issues"
   },
-	"homepage": "https://github.com/RevStackCore/Extensions"
+	"homepage": "https://github.com/RevStackCore/AuthorizeDotNet"
 }
