@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>RevStackCore.AuthorizeDotNet</PackageId>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageVersion>2.0.1</PackageVersion>
     <Authors>Scott Francis, David Sheets</Authors>
     <Company>MIS</Company>
     <PackageLicenseUrl>https://github.com/RevStackCore/AuthorizeDotNet/blob/master/LICENSE</PackageLicenseUrl>
@@ -25,5 +25,8 @@
   <ItemGroup>
     <PackageReference Include="RevStackCore.Net" Version="1.0.7" />
     <PackageReference Include="RevStackCore.Serialization" Version="1.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Settings\" />
   </ItemGroup>
 </Project>

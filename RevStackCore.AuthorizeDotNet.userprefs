@@ -1,5 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="RevStackCore.AuthorizeDotNet/Settings/ANetGatewayConfiguration.cs">
+    <Files>
+      <File FileName="RevStackCore.AuthorizeDotNet/Settings/ANetGatewayConfiguration.cs" Line="6" Column="8" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
