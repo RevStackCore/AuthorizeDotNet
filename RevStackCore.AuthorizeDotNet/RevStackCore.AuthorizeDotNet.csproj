@@ -3,13 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>RevStackCore.AuthorizeDotNet</PackageId>
-    <PackageVersion>2.0.1</PackageVersion>
+    <PackageVersion>2.0.2</PackageVersion>
     <Authors>Scott Francis, David Sheets</Authors>
     <Company>MIS</Company>
     <PackageLicenseUrl>https://github.com/RevStackCore/AuthorizeDotNet/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright 2017</Copyright>
+    <Copyright>Copyright 2019</Copyright>
     <PackageProjectUrl>https://github.com/RevStackCore/AuthorizeDotNet.git</PackageProjectUrl>
-    <PackageIconUrl></PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/RevStackCore/AuthorizeDotNet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://s3.amazonaws.com/revstack/icons/revstackcore-64x64.png</PackageIconUrl>
     <PackageReleaseNotes>Initial release. Current functions includes Authorize, Capture, Charge, Refund and Void</PackageReleaseNotes>
     <PackageTags>Authorize.net .net core RevStack RevStackCore</PackageTags>
     <Description>.Net Core Authorize.Net SDK</Description>
@@ -17,14 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-   
-  </ItemGroup>
-
-  
-
-  <ItemGroup>
-    <PackageReference Include="RevStackCore.Net" Version="1.0.7" />
-    <PackageReference Include="RevStackCore.Serialization" Version="1.0.3" />
+    <PackageReference Include="RevStackCore.Net" Version="1.0.8" />
+    <PackageReference Include="RevStackCore.Serialization" Version="1.0.4" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Settings\" />
