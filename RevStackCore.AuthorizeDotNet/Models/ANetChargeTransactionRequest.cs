@@ -17,7 +17,7 @@ namespace RevStackCore.AuthorizeDotNet
         public ANetShipTo ShipTo { get; set; }
         public string CustomerIP { get; set; }
         public string EmployeeId { get; set; }
-        public IEnumerable<ANetTransactionSetting> TransactionSettings { get; set; }
+        public ANetTransactionSettings TransactionSettings { get; set; }
         public IEnumerable<ANetUserField> UserFields { get; set; }
         public string MerchantDescriptor { get; set; }
        

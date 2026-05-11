@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>RevStackCore.AuthorizeDotNet</PackageId>
-    <PackageVersion>2.0.2</PackageVersion>
+    <PackageVersion>2.0.3</PackageVersion>
     <Authors>Scott Francis, David Sheets</Authors>
     <Company>MIS</Company>
     <PackageLicenseUrl>https://github.com/RevStackCore/AuthorizeDotNet/blob/master/LICENSE</PackageLicenseUrl>
@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/RevStackCore/AuthorizeDotNet.git</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/RevStackCore/AuthorizeDotNet/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl>https://s3.amazonaws.com/revstack/icons/revstackcore-64x64.png</PackageIconUrl>
-    <PackageReleaseNotes>Initial release. Current functions includes Authorize, Capture, Charge, Refund and Void</PackageReleaseNotes>
+    <PackageReleaseNotes>2.0.3: Add testRequest constructor flag to ANetProcessor for per-transaction test mode (transactionSettings.setting[testRequest]=true). Fix TransactionSettings wire format to match Authorize.NET's expected {"setting":[...]} shape via new ANetTransactionSettings wrapper.</PackageReleaseNotes>
     <PackageTags>Authorize.net .net core RevStack RevStackCore</PackageTags>
     <Description>.Net Core Authorize.Net SDK</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

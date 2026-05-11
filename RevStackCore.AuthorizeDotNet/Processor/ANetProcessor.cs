@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Flurl.Http;
 using JSON=RevStackCore.Serialization.Json;
@@ -11,10 +12,27 @@ namespace RevStackCore.AuthorizeDotNet
         private string _loginId { get; set; }
         private string _transactionKey { get; set; }
         private string _endPoint { get; set; }
-        public ANetProcessor(string loginId, string transactionKey, ANetProcessorModeType mode) 
+        private bool _testRequest { get; set; }
+
+        public ANetProcessor(string loginId, string transactionKey, ANetProcessorModeType mode)
+            : this(loginId, transactionKey, mode, false)
+        {
+        }
+
+        /// <summary>
+        /// Creates a processor with an explicit per-transaction test flag.
+        /// When testRequest is true, every transaction sent through the
+        /// convenience overloads (and any low-level overload whose caller
+        /// hasn't already supplied TransactionSettings) is sent with
+        /// settingName=testRequest, settingValue=true. The Authorize.NET
+        /// gateway validates the request end-to-end without settling it.
+        /// Orthogonal to the Sandbox/Live endpoint choice in <paramref name="mode"/>.
+        /// </summary>
+        public ANetProcessor(string loginId, string transactionKey, ANetProcessorModeType mode, bool testRequest)
         {
             _loginId = loginId;
             _transactionKey = transactionKey;
+            _testRequest = testRequest;
             if(mode==ANetProcessorModeType.Sandbox)
             {
                 _endPoint = sandboxEndPoint;
@@ -45,6 +63,7 @@ namespace RevStackCore.AuthorizeDotNet
             transaction.Payment = payment;
             transaction.Amount = amount;
             transaction.TransactionType = ANetTransactionType.authCaptureTransaction;
+            applyTestRequestIfNeeded(transaction);
             requestBody.TransactionRequest = transaction;
             requestBody.MerchantAuthentication = merchantAuthentication;
             requestBody.RefId = refId;
@@ -74,6 +93,7 @@ namespace RevStackCore.AuthorizeDotNet
             transaction.Amount = amount;
             transaction.TransactionType = ANetTransactionType.authCaptureTransaction;
             transaction.BillTo = billing;
+            applyTestRequestIfNeeded(transaction);
             requestBody.TransactionRequest = transaction;
             requestBody.MerchantAuthentication = merchantAuthentication;
             requestBody.RefId = refId;
@@ -93,6 +113,7 @@ namespace RevStackCore.AuthorizeDotNet
             var requestBody = new ANetChargeTransactionRequestBody();
             var merchantAuthentication = getMerchantAuthentication();
             transaction.TransactionType = ANetTransactionType.authCaptureTransaction;
+            applyTestRequestIfNeeded(transaction);
             requestBody.MerchantAuthentication = merchantAuthentication;
             requestBody.RefId = refId;
             requestBody.TransactionRequest = transaction;
@@ -122,6 +143,7 @@ namespace RevStackCore.AuthorizeDotNet
             transaction.Payment = payment;
             transaction.Amount = amount;
             transaction.TransactionType = ANetTransactionType.authOnlyTransaction;
+            applyTestRequestIfNeeded(transaction);
             requestBody.MerchantAuthentication = merchantAuthentication;
             requestBody.RefId = refId;
             requestBody.TransactionRequest = transaction;
@@ -151,6 +173,7 @@ namespace RevStackCore.AuthorizeDotNet
             transaction.Amount = amount;
             transaction.TransactionType = ANetTransactionType.authOnlyTransaction;
             transaction.BillTo = billing;
+            applyTestRequestIfNeeded(transaction);
             requestBody.MerchantAuthentication = merchantAuthentication;
             requestBody.RefId = refId;
             requestBody.TransactionRequest = transaction;
@@ -170,6 +193,7 @@ namespace RevStackCore.AuthorizeDotNet
             var requestBody = new ANetAuthorizeTransactionRequestBody();
             var merchantAuthentication = getMerchantAuthentication();
             transaction.TransactionType = ANetTransactionType.authOnlyTransaction;
+            applyTestRequestIfNeeded(transaction);
             requestBody.MerchantAuthentication = merchantAuthentication;
             requestBody.RefId = refId;
             requestBody.TransactionRequest = transaction;
@@ -235,104 +259,103 @@ namespace RevStackCore.AuthorizeDotNet
         }
 
         #region "Private"
+        // Authorize.NET responses always include a top-level "messages" object with
+        // a resultCode. When resultCode == "Error" the API-level call failed (auth,
+        // schema, merchant config, etc.). In some of those cases the response also
+        // contains a stub transactionResponse, so we cannot just key off
+        // entity.TransactionResponse != null -- we must check the outer resultCode
+        // first or we'll silently lose the error info.
+        private bool tryGetApiError(string strResult, out IEnumerable<ANetMessage> messages)
+        {
+            messages = null;
+            var outer = JSON.DeserializeObject<ANetCreateResponseMessages>(strResult);
+            if (outer?.Messages != null &&
+                string.Equals(outer.Messages.ResultCode, "Error", StringComparison.OrdinalIgnoreCase))
+            {
+                messages = outer.ToMessageEnumerable();
+                return true;
+            }
+            return false;
+        }
+
         private async Task<ANetChargeTransactionResponse> chargeAsync(ANetChargeCreateTransactionRequest request)
         {
-            var json = JSON.SerializeObject(request);
+            var json = JSON.SerializeObject(request, true);
             var strResult = await _endPoint.PostStringAsync(json).ReceiveString();
+            if (tryGetApiError(strResult, out var apiErrors))
+            {
+                return new ANetChargeTransactionResponse
+                {
+                    ResponseCode = ANetResponseCodeType.Error,
+                    Messages = apiErrors
+                };
+            }
             var entity = JSON.DeserializeObject<ANetChargeCreateTransactionResponse>(strResult);
-            if (entity.TransactionResponse != null)
-            {
-                return entity.TransactionResponse;
-            }
-            else
-            {
-                //return a new transactionResponse object with the message list
-                var errorEntity = new ANetChargeTransactionResponse();
-                var messages = JSON.DeserializeObject<ANetCreateResponseMessages>(strResult);
-                errorEntity.ResponseCode = ANetResponseCodeType.Error;
-                errorEntity.Messages = messages.ToMessageEnumerable();
-                return errorEntity;
-            }
+            return entity.TransactionResponse ?? new ANetChargeTransactionResponse { ResponseCode = ANetResponseCodeType.Error };
         }
 
         private async Task<ANetAuthorizeTransactionResponse> authorizeAsync(ANetAuthorizeCreateTransactionRequest request)
         {
-            var json = JSON.SerializeObject(request);
+            var json = JSON.SerializeObject(request, true);
             var strResult = await _endPoint.PostStringAsync(json).ReceiveString();
+            if (tryGetApiError(strResult, out var apiErrors))
+            {
+                return new ANetAuthorizeTransactionResponse
+                {
+                    ResponseCode = ANetResponseCodeType.Error,
+                    Messages = apiErrors
+                };
+            }
             var entity = JSON.DeserializeObject<ANetAuthorizeCreateTransactionResponse>(strResult);
-            if (entity.TransactionResponse != null)
-            {
-                return entity.TransactionResponse;
-            }
-            else
-            {
-                //return a new transactionResponse object with the message list
-                var errorEntity = new ANetAuthorizeTransactionResponse();
-                var messages = JSON.DeserializeObject<ANetCreateResponseMessages>(strResult);
-                errorEntity.ResponseCode = ANetResponseCodeType.Error;
-                errorEntity.Messages = messages.ToMessageEnumerable();
-                return errorEntity;
-            }
+            return entity.TransactionResponse ?? new ANetAuthorizeTransactionResponse { ResponseCode = ANetResponseCodeType.Error };
         }
 
         private async Task<ANetCaptureTransactionResponse> captureAsync(ANetCaptureCreateTransactionRequest request)
         {
-            var json = JSON.SerializeObject(request);
+            var json = JSON.SerializeObject(request, true);
             var strResult = await _endPoint.PostStringAsync(json).ReceiveString();
+            if (tryGetApiError(strResult, out var apiErrors))
+            {
+                return new ANetCaptureTransactionResponse
+                {
+                    ResponseCode = ANetResponseCodeType.Error,
+                    Messages = apiErrors
+                };
+            }
             var entity = JSON.DeserializeObject<ANetCaptureCreateTransactionResponse>(strResult);
-            if (entity.TransactionResponse != null)
-            {
-                return entity.TransactionResponse;
-            }
-            else
-            {
-                //return a new transactionResponse object with the message list
-                var errorEntity = new ANetCaptureTransactionResponse();
-                var messages = JSON.DeserializeObject<ANetCreateResponseMessages>(strResult);
-                errorEntity.ResponseCode = ANetResponseCodeType.Error;
-                errorEntity.Messages = messages.ToMessageEnumerable();
-                return errorEntity;
-            }
+            return entity.TransactionResponse ?? new ANetCaptureTransactionResponse { ResponseCode = ANetResponseCodeType.Error };
         }
 
         private async Task<ANetRefundTransactionResponse> refundAsync(ANetRefundCreateTransactionRequest request)
         {
-            var json = JSON.SerializeObject(request);
+            var json = JSON.SerializeObject(request, true);
             var strResult = await _endPoint.PostStringAsync(json).ReceiveString();
+            if (tryGetApiError(strResult, out var apiErrors))
+            {
+                return new ANetRefundTransactionResponse
+                {
+                    ResponseCode = ANetResponseCodeType.Error,
+                    Messages = apiErrors
+                };
+            }
             var entity = JSON.DeserializeObject<ANetRefundCreateTransactionResponse>(strResult);
-            if (entity.TransactionResponse != null)
-            {
-                return entity.TransactionResponse;
-            }
-            else
-            {
-                //return a new transactionResponse object with the message list
-                var errorEntity = new ANetRefundTransactionResponse();
-                var messages = JSON.DeserializeObject<ANetCreateResponseMessages>(strResult);
-                errorEntity.ResponseCode = ANetResponseCodeType.Error;
-                errorEntity.Messages = messages.ToMessageEnumerable();
-                return errorEntity;
-            }
+            return entity.TransactionResponse ?? new ANetRefundTransactionResponse { ResponseCode = ANetResponseCodeType.Error };
         }
 
         private async Task<ANetVoidTransactionResponse> voidAsync(ANetVoidCreateTransactionRequest request)
         {
-            var json = JSON.SerializeObject(request);
+            var json = JSON.SerializeObject(request, true);
             var strResult = await _endPoint.PostStringAsync(json).ReceiveString();
+            if (tryGetApiError(strResult, out var apiErrors))
+            {
+                return new ANetVoidTransactionResponse
+                {
+                    ResponseCode = ANetResponseCodeType.Error,
+                    Messages = apiErrors
+                };
+            }
             var entity = JSON.DeserializeObject<ANetVoidCreateTransactionResponse>(strResult);
-            if (entity.TransactionResponse != null)
-            {
-                return entity.TransactionResponse;
-            }
-            else
-            {
-                //return a new transactionResponse object with the message list
-                var errorEntity = new ANetVoidTransactionResponse();
-                var messages = JSON.DeserializeObject<ANetCreateResponseMessages>(strResult);
-                errorEntity.ResponseCode = ANetResponseCodeType.Error;
-                errorEntity.Messages = messages.ToMessageEnumerable();
-                return errorEntity;
-            }
+            return entity.TransactionResponse ?? new ANetVoidTransactionResponse { ResponseCode = ANetResponseCodeType.Error };
         }
        
         private ANetMerchantAuthentication getMerchantAuthentication()
@@ -341,6 +364,22 @@ namespace RevStackCore.AuthorizeDotNet
             {
                 Name = _loginId,
                 TransactionKey = _transactionKey
+            };
+        }
+
+        // Populates TransactionSettings with testRequest=true when the
+        // processor was constructed with testRequest enabled. Skips if the
+        // caller already supplied settings (don't clobber explicit values).
+        private void applyTestRequestIfNeeded(ANetChargeTransactionRequest transaction)
+        {
+            if (!_testRequest) return;
+            if (transaction.TransactionSettings != null) return;
+            transaction.TransactionSettings = new ANetTransactionSettings
+            {
+                Setting = new List<ANetTransactionSetting>
+                {
+                    new ANetTransactionSetting { SettingName = "testRequest", SettingValue = "true" }
+                }
             };
         }
 
